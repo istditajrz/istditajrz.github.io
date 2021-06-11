@@ -35,7 +35,7 @@ var server = http.createServer(function (req, res) {
     switch (req.url) {
         case "/": return send_file("./index.html", res);
         case "/scorpia.gif": return send_file("./scorpia.gif", res);
-        case "/icon.ico": return send_file("./500.png", res);
+        case "/500.ico": return send_file("./500.png", res);
         case "/style.css": return send_file("./style.css", res);
         default:
             res.statusCode = 404;
