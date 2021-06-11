@@ -40,6 +40,7 @@ let server = http.createServer((req, res) => {
         case "/scorpia.gif": return send_file("./scorpia.gif", res);
         case "/icon.ico": return send_file("./500.png", res);
         case "/style.css": return send_file("./style.css", res);
+        case "/about": return send_file("./about.html", res)
         default: res.statusCode = 404; return res.end('<h1 style="text-align:center;padding:100px;">404 Page not found</h1>');
     }
 });
