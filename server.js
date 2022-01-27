@@ -1,7 +1,8 @@
-var http = require('http');
-var path = require('path');
-var fs = require('fs');
-var mime = {
+const http = require('http');
+const path = require('path')
+const fs = require('fs');
+
+const mime = {
     html: 'text/html',
     txt: 'text/plain',
     css: 'text/css',
@@ -10,9 +11,11 @@ var mime = {
     png: 'image/png',
     svg: 'image/svg+xml',
     js: 'application/javascript',
-    json: 'application/json'
+    json: 'application/json',
+    mp3: 'audio/mpeg3'
 };
-var send_file = function (filename, res) {
+
+let send_file = function (filename: string, res) {
     var type = mime[path.extname(filename).slice(1)] || 'text/plain';
     var s = fs.createReadStream(filename);
     s.on('open', function () {
@@ -24,9 +27,10 @@ var send_file = function (filename, res) {
         res.statusCode = 404;
         res.end('Not found');
     });
-};
-var server = http.createServer(function (req, res) {
-    var headers = req.headers;
+}
+
+let server = http.createServer((req, res) => {
+    let headers = req.headers;
     if (req.method !== 'GET') {
         res.statusCode = 501;
         res.setHeader('Content-Type', 'text/plain');
@@ -38,10 +42,9 @@ var server = http.createServer(function (req, res) {
         case "/icon.ico": return send_file("./500.png", res);
         case "/style.css": return send_file("./style.css", res);
         case "/about": return send_file("./about.html", res);
-        default:
-            res.statusCode = 404;
-            return res.end('<h1 style="text-align:center;padding:100px;">404 Page not found</h1>');
+        case "/mp3": return send_file("./Drake-Hotline-Bling-Lyrics.mp3", res);
+        default: res.statusCode = 404; return res.end('<h1 style="text-align:center;padding:100px;">404 Page not found</h1>');
     }
 });
-console.log("Attached");
+console.log("Attached")
 server.listen(1337, "");
