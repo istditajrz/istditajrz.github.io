@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Philosphy Haikus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <div class="modal fade" role="dialog" tabindex="-1" id="infoModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Haikus?</h4><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>Haiku is a form of Japanese poetry, often written in English as having a 3-line structure: 5
+                        syllables, 7 syllables, 5 syllables.<br><br>"Haiku" in English is a term sometimes loosely
+                        applied to any short, impressionistic poem, but
+                        there are certain characteristics that are commonly associated with the genre:<br></p>
+                    <ul>
+                        <li>a focus on nature or the seasons<br></li>
+                        <li>a division into two asymmetrical sections that juxtaposes two subjects (e.g. something
+                            natural and something human-made, two unexpectedly similar things, etc.)<br></li>
+                        <li>a contemplative or wistful tone and an impressionistic brevity<br></li>
+                        <li>"<a href="https://en.wikipedia.org/wiki/Telegram_style">telegram style</a>" syntax; no
+                            superfluous words<br></li>
+                        <li>an emphasis on imagery over exposition<br></li>
+                        <li>avoidance of metaphor and similes<br></li>
+                        <li>non-rhyming lines<br></li>
+                    </ul>
+                    <p>(The above is adapted from <a
+                            href="https://en.wikipedia.org/wiki/Haiku_in_English">https://en.wikipedia.org/wiki/Haiku_in_English</a>)
+                    </p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light btn-close" type="button"
+                        data-bs-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-bottom: 10px;margin-top: 10px;max-width: 1000px;">
+        <div class="card mx-auto" style="margin-top: 4px;margin-bottom: 10px;">
+            <div class="card-body">
+                <h4 class="display-4 card-title" style="font-size: 3rem;">MCS Philosophy Haiku Competition</h4>
+                <h6 class="text-muted card-subtitle mb-2">Celebrating World Philosophy Day 2022</h6>
+                <p class="card-text">Open to MCS pupils (and others!): write a haiku about one of the questions listed
+                    below. Unsure
+                    about what a haiku is? Tap the button below.</p>
+                <button class="btn btn-primary" type="button" data-bs-target="#infoModal" data-bs-toggle="modal">About
+                    Haikus</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form action="https://send.pageclip.co/y1TyG8VH7aKIDKdaMaFsPj1PSk2ZrqBk" class="pageclip-form"
+                    method="post" id="submitForm">
+                    <input class="form-control" type="hidden" value="mcs-philosophy-haiku-2020" name="form-occasion">
+                    <div class="form-group" style="margin-top: 2px;" id="checks">
+                        <label for="selector">Choose your question:</label>
+                        <select class="form-control" id="selector" name="question"></select>
+                    </div>
+                    <div class="form-group"><label for="haiku">Your haiku</label><textarea class="form-control"
+                            name="haiku" rows="3" placeholder="Enter your haiku!" required></textarea></div>
+                    <div class="form-group"><label>Your name</label><input class="form-control" type="text"
+                            name="fullname" placeholder="Bill Waynflete" required></div>
+                    <div class="form-group"><label>Your houseroom (for MCS pupils)</label><input class="form-control"
+                            type="text" name="houseroom" placeholder="Ma1a"></div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button id="submitButton" class="pageclip-form__submit btn btn-primary g-recaptcha"
+                            data-sitekey="6LcLGxgjAAAAACPu529UXnVkJS-mbdqAr_Jz3Km0" data-callback="onSubmit"
+                            type="submit" disabled>
+                            <span>Submit your haiku!</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <p><small class="text-center" style="color: grey;">Nicholas Marsh for MCS Philosophy 2020<br>adapted by Johnny
+                Marsh for MCS Philosophy 2022</small></p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+    <script>
+        function onSubmit(token) {
+            $("submitForm").submit()
+        }
+
+        function valid() {
+            $('#submitButton').prop('disabled', false);
+        };
+        const questions = [
+            "Is it ever good to be angry?",
+            "Do you think in language?",
+            "What is music?",
+            "What is health?",
+            "What makes science special?",
+            "Could it ever be right to do more harm than good?",
+            "Would science be the same if we had different senses?",
+            "Does anything non-physical exist? How would you know?",
+            "What is a text?",
+            "Am I responsible for consequences I didn’t intend?",
+            "Can art reveal to us what is true?",
+            "Could you be friends with a robot?",
+            "Would you like to be immortal?",
+            "Are you responsible for all of your choices?",
+            "Can we give meaning to our own lives?",
+            "‘If Caesar had been alive today he would have used catapults’. ‘If Caesar had been alive today he would have used nuclear weapons’. Which is true?",
+            "Are the French word ‘international’ and the English word ‘international’ the same word?",
+            "Would you rather live in a democracy, or a tyranny led by Father Christmas?",
+            "If there were a pill that would make you happy for the rest of your life, would you take it?",
+            "How would a fair society be organised?",
+            "Could animals have rights?",
+            "What’s the difference between believing something and knowing it?",
+            "What is a cause?",
+            "What are the limits of science?",
+            "What is time?",
+            "What is it for a statement to be true?",
+            "What is the best way to live?",
+            "How do I know what is right?",
+            "Are there moral facts?",
+            "How do words relate to the world?",
+            "What is it to be a person?",
+            "What is the relationship between the mind and the body?",
+            "What is it for a belief to be justified?"
+        ];
+        let selector = $("#selector");
+        for (let i = 0; i < questions.length; i += 1) {
+            selector.append("<option>" + questions[i] + "</option>");
+        }
+    </script>
+</body>
+
+</html>
