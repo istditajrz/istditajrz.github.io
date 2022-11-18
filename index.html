@@ -59,7 +59,7 @@
             <div class="card-body">
                 <form action="https://send.pageclip.co/y1TyG8VH7aKIDKdaMaFsPj1PSk2ZrqBk" class="pageclip-form"
                     method="post" id="submitForm">
-                    <input class="form-control" type="hidden" value="mcs-philosophy-haiku-2020" name="form-occasion">
+                    <input class="form-control" type="hidden" value="mcs-philosophy-haiku-2022" name="form-occasion">
                     <div class="form-group" style="margin-top: 2px;" id="checks">
                         <label for="selector">Choose your question:</label>
                         <select class="form-control" id="selector" name="question"></select>
@@ -70,10 +70,9 @@
                             name="fullname" placeholder="Bill Waynflete" required></div>
                     <div class="form-group"><label>Your houseroom (for MCS pupils)</label><input class="form-control"
                             type="text" name="houseroom" placeholder="Ma1a"></div>
+                    <div class="g-recaptcha" data-sitekey="6Lc7chgjAAAAAIetqledt15mbklTdZY0HZwuAsDo"></div>
                     <div class="d-flex justify-content-center mt-3">
-                        <button id="submitButton" class="pageclip-form__submit btn btn-primary g-recaptcha"
-                            data-sitekey="6LcLGxgjAAAAACPu529UXnVkJS-mbdqAr_Jz3Km0" data-callback="onSubmit"
-                            type="submit" disabled>
+                        <button id="submitButton" class="pageclip-form__submit btn btn-primary" type="submit" disabled>
                             <span>Submit your haiku!</span>
                         </button>
                     </div>
@@ -87,10 +86,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
     <script>
-        function onSubmit(token) {
-            $("submitForm").submit()
-        }
-
         function valid() {
             $('#submitButton').prop('disabled', false);
         };
