@@ -6,6 +6,8 @@
     <meta name="viewpoint" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Philosphy Haikus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://s.pageclip.co/v1/pageclip.css" media="screen">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -44,8 +46,8 @@
     <div class="container" style="margin-bottom: 10px;margin-top: 10px;max-width: 1000px;">
         <div class="card mx-auto" style="margin-top: 4px;margin-bottom: 10px;">
             <div class="card-body">
-                <h4 class="display-4 card-title" style="font-size: 3rem;">MCS Philosophy Haiku Competition</h4>
-                <h6 class="text-muted card-subtitle mb-2">Celebrating World Philosophy Day 2022</h6>
+                <h4 class="display-4 card-title" style="font-size: 3rem;">MCS Philosophy Haiku Competition 2023</h4>
+                <h6 class="text-muted card-subtitle mb-2">Celebrating World Philosophy Day 2023</h6>
                 <p class="card-text">Open to MCS pupils (and others!): write a haiku about one of the questions listed
                     below. Unsure
                     about what a haiku is? Tap the button below.</p>
@@ -55,14 +57,95 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h3>Sorry! The competition is now closed, save yours for next year!</h3>
+                <form action="<PAGE_CLIP_URL" class="pageclip-form"
+                    method="post" id="submitForm">
+                    <input class="form-control" type="hidden" value="mcs-philosophy-haiku-2022" name="form-occasion">
+                    <div class="form-group" style="margin-top: 2px;" id="checks">
+                        <label for="selector">Choose your question:</label>
+                        <select class="form-control" id="selector" name="question"></select>
+                    </div>
+                    <div class="form-group"><label for="haiku">Your haiku</label><textarea class="form-control"
+                            name="haiku" rows="3" placeholder="Enter your haiku!" id="haiku"
+                            oninput="javascript:OnHaikuInput(this.value)" required></textarea></div>
+                    <div class="form-group"><label>Your name</label><input class="form-control" type="text"
+                            name="fullname" placeholder="Bill Waynflete" oninput="javascript:OnNameInput(this.value)"
+                            id="name" required>
+                    </div>
+                    <div class="form-group"><label>Your houseroom (for MCS pupils)</label><input class="form-control"
+                            type="text" name="houseroom" placeholder="Ma1a" id="houseroom"
+                            oninput="javascript:OnHouseRoomInput(this.value)">
+                    </div>
+                    <div class="g-recaptcha" data-sitekey="6Lc7chgjAAAAAMoTyD53McezTNkwAOesH57YOY0d"
+                        data-callback="valid"></div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button id="submitButton" class="pageclip-form__submit btn btn-primary" type="submit" disabled>
+                            <span>Submit your haiku!</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-        <p><small class="text-center" style="color: grey;">Nicholas Marsh for MCS Philosophy 2020<br>adapted by Johnny
+        <p><small class="text-center">Nicholas Marsh for MCS Philosophy
+                2020</small><br><small style="color: grey;">Adapted by Johnny
                 Marsh for MCS Philosophy 2022 & 2023</small></p>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+    <script>
+        function valid() {
+            $('#submitButton').prop('disabled', false);
+        };
+        fetch('/static/questions.json')
+            .then(response => response.json())
+            .then(questions => {
+                let selector = $("#selector");
+                for (let i = 0; i < questions.length; i++) {
+                    selector.append("<option>" + questions[i] + "</option>")
+                }
+            })
+            .finally(() => {
+                console.log("calling");
+                OnReload();
+            });
+
+        function OnHaikuInput(text) {
+            localStorage['haiku'] = text;
+        }
+
+        function OnNameInput(name) {
+            localStorage['name'] = name;
+        }
+
+        function OnHouseRoomInput(houseroom) {
+            localStorage['houseroom'] = houseroom;
+        }
+
+        function OnQuestionInput() {
+            localStorage['question'] = this.value;
+        }
+        document.getElementById('selector').addEventListener('change', OnQuestionInput);
+
+        function get(selector) {
+            return document.getElementById(selector);
+        }
+
+        function OnReload() {
+            console.log(localStorage);
+            $('#haiku').value = localStorage['haiku'] || "";
+            $('#name').value = localStorage['name'] || "";
+            $('#houseroom').value = localStorage['houseroom'] || "";
+            const options = Array.from(document.getElementsByTagName('option'));
+            const index = options.map((v) => v.value).indexOf(localStorage['question']);
+            if (index === -1) return;
+            options[index].selected = 'selected';
+        }
+
+        // let selector = $("#selector");
+        // for (const question of questions) {
+        //     selector.append("<option>" + question + "</option>");
+        // }
+    </script>
 </body>
 
 </html>
